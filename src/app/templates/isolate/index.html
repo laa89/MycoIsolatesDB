@@ -1,0 +1,56 @@
+{% extends 'index_base.html' %}
+
+{% block header %}
+    <h2>{% block title %}Isolate Index{% endblock %}</h2>
+{% endblock %}
+
+{% block index_header %}
+    <th>Isolate</th>
+    <th>Complete Sequence</th>
+    <th>Processing Stage</th>
+    <th>Isolate Picture</th>
+{% endblock %}
+
+{% block top_page_buttons %}{% block bot_page_buttons %}
+    <form class="pages" action={% block filters_input %}
+                       "{{ url_for('isolate.isolates_index') }}" {% endblock %}
+                       method="get">
+        {% if page > 1 %}
+            <button type="submit" name="page" value={{ page-1 }}>Prev&nbsp&nbsp</button>
+        {% endif %}
+        {% if page_max > 1 %}
+            {% for i in range(page_max) %}
+                <button type="submit" name="page" value={{ i+1 }}>{{ i+1 }}</button>
+            {% endfor %}
+        {% endif %}
+        {% if page < page_max %}
+            <button type="submit" name="page" value={{ page+1 }}>&nbsp&nbspNext</button>
+        {% endif %}
+{% endblock %} 
+{% endblock %}
+
+
+{% block index_entries %}
+    {% for isolate in chunked_isolates[page-1] %}
+        <tr> 
+            <td class="entry_link"><a href="{{ url_for('isolate.isolate_page', isolate_id=isolate.IsolateID) }}">{{ isolate.IsolateID }}</th>
+            {% if isolate.Complete == 1 %}
+                <td>{{ isolate.IsolateID}}.fasta</td>
+            {% else %}
+                <td></td>
+            {% endif %}
+            {% if isolate.Stage == None %}
+                <td></td>
+            {% else %}
+                <td>{{ isolate.Stage }}</td>
+            {% endif %}
+            <td><img class="mini_picture" src=
+                {% if isolate.isolate_pic_file %}
+                    "{{ isolate.isolate_pic_file }}"
+                {% else %}
+                    "{{ url_for('static', filename='pictures/stock_pic.jpg') }}"
+                {% endif %}
+                alt="N/A"></td>
+        </tr>
+    {% endfor %}
+{% endblock %}

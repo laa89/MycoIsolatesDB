@@ -1,0 +1,29 @@
+{% extends 'data_base.html' %}
+
+{% block header %}
+    <h2>{% block title %}Induction Assay Data{% endblock %}</h2>
+{% endblock %}
+
+{% block data_table %}
+    <tr>
+        <th>Surrogate&#8597|Victim&#8596</th>
+        {% for victim in victims %}
+            <th><a href="{{ url_for('isolate.isolate_page', isolate_id=dict[victim]) }}">{{ victim }}</th>
+        {% endfor %}
+    </tr>
+
+    {% for dict in induction_data_dicts %}
+        <tr>
+            <th><a href="{{ url_for('isolate.isolate_page', isolate_id=dict["Surrogate"]) }}">{{ dict["Surrogate"] }}</th>
+            {% for victim in victims %}
+                {% if dict[victim] == 1 %}
+                    <td>Y</td>
+                {% elif dict[victim] == 0 %}
+                    <td>N</td>
+                {% else %}
+                    <td></td>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    {% endfor %}
+{% endblock %}

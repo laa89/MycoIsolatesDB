@@ -1,0 +1,32 @@
+{% extends 'data_base.html' %}
+
+{% block header %}
+    <h2>{% block title %}Survival Assay Data{% endblock %}</h2>
+{% endblock %}
+
+{% block data_control %}
+    <form class="day" action="{{ url_for('survival_assay.survival_assays_index') }}">
+        <button type="submit" name="day" value=2>2</button>
+        <button type="submit" name="day" value=5>5</button>
+    </form>
+{% endblock %}
+{% block data_table %}
+    <tr>
+        <th>Phage(s)&#8597|Isolate&#8596</th>
+        {% for data_dict in survival_data_dicts %}
+            <th><a href="{{ url_for('isolate.isolate_page', isolate_id=data_dict['isolate']) }}">{{ data_dict['isolate'] }}</th>
+        {% endfor %}
+    </tr>
+    {% for phage in phages %}
+        <tr>
+            <th>{{ phage }}</th>
+        {% for data_dict in survival_data_dicts %}
+            {% if data_dict.get(phage) != None %}
+                <td>{{ data_dict[phage] }}</td>
+            {% else %}
+                <td></td>
+            {% endif %}
+        {% endfor %}
+        </tr>
+    {% endfor %}
+{% endblock %}

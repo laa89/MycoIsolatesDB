@@ -1,0 +1,27 @@
+<!doctype html>
+<title>{% block title %}{% endblock %} - MycoIsolatesDB</title>
+<head>
+    <link rel="stylesheet" href={% block stylelink %}{% endblock %} type="text/css">
+</head>
+<nav class="auth">
+    <h1><a href="/">MycoIsolatesDB</h1>
+</nav>
+<nav class="directory">
+    <h4>
+        <a href="/">Home&nbsp&nbsp</a>
+        <a href="{{ url_for('isolate.isolates_index') }}">Isolates&nbsp&nbsp</a>
+        <a href="{{ url_for('plating.platings_index') }}">EOP Assays&nbsp&nbsp</a>
+        <a href="{{ url_for('survival_assay.survival_assays_index') }}">Survival Assays&nbsp&nbsp</a>
+        <a href="{{ url_for('induction.induction_index') }}">Prophage Release&nbsp&nbsp</a>
+        <a href="{{ url_for('contact.contacts_index') }}">Contacts&nbsp&nbsp</a>
+    </h4>
+</nav>
+<section class="content">
+    <header>
+        {% block header %}{% endblock %}
+    </header>
+    {% for message in get_flashed_messages() %}
+        <div class="flash">{{ message }}</div>
+    {% endfor %}
+    {% block content %}{% endblock %}
+</section>

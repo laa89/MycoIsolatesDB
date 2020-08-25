@@ -1,0 +1,70 @@
+@import "base_style.css";
+
+a:hover {
+    color: #9d7868;
+}
+
+.data_table {
+    overflow: scroll;
+    margin-top: 2%;
+    border-radius: 25px;
+    background-color: #eeeeee;
+    height: 40rem;
+}
+
+.data_table table{
+    border-collapse: collapse;
+}
+
+.data_table td {
+    text-align: right;
+}
+
+.data_table tr:first-child th {
+    top: 0;
+    position: sticky;
+    background-color: #eeeeee;
+}
+
+.data_table th:first-child{ 
+    left: 0;
+    position: sticky;
+    background-color: #b5b5b5;
+    padding: 5px;
+}
+
+.data_table tr:first-child th:first-child {
+    top: 0;
+    left: 0;
+    position: sticky;
+    background-color: #b5b5b5;
+    z-index: 1;
+}
+
+.data_table tr:first-child th:first-child {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.data_table tr:last-child th:first-child {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+
+.data_table tr td:nth-child(even), th:nth-child(even) {
+    background-color: lightgray !important;
+}
+
+.data_table tr:nth-child(even) td:nth-child(odd) {
+    background-color: white;
+}
+
+.data_table tr:first-child th:nth-child(even) {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.data_table tr:last-child td:nth-child(even) {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}

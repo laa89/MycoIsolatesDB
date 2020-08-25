@@ -1,0 +1,62 @@
+@import "base_style.css";
+
+body { 
+    max-width: 960px; 
+    margin: 0 auto; 
+    background: white; 
+    border-radius: 10px;
+}
+
+h2 {
+    font-family: "Noto Sans", sans-serif;
+    font-weight: normal;
+    color: #489fd9;
+    margin: 1rem;
+}
+
+.entry_image {
+    background-color: white;
+    background-position: center;
+    height: 225px;
+    width: 225px;
+}
+
+div.data_head { 
+    margin-top: 1%;
+    padding: 2%;
+    text-align: center;
+} 
+
+.data_head_child {
+    display: inline-block;
+    vertical-align: top;
+    padding: 0 2%;
+}
+
+.data_head_child table {
+    border-collapse: collapse;
+}
+
+.data_head_child th {
+    text-align: right;
+    border-right: 2px solid #b88b77;
+    padding: 0 5px 0 0;
+}
+
+.data_head_child td {
+    text-align: left;
+    padding: 0 0 0 25px;
+}
+
+div.data_body{
+    /*border: 2px solid #489fd9; */
+
+    border-radius: 15px;
+    text-align: center;
+}
+
+table.data_body th{
+    background-color: #eeeeee;
+    border-radius: 5px;
+}
+

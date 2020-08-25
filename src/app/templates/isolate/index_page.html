@@ -1,0 +1,40 @@
+{% endblock %}
+
+{% block index_header %}
+    <th>Isolate</th>
+    <th>Complete Sequence</th>
+    <th>Processing Stage</th>
+    <th>Isolate Picture</th>
+{% endblock %}
+
+{% block page_buttons %}
+    {% for i in range(1, 5) %}
+        <button type="page_button">{{ i }}</button>
+    {% endfor %}
+{% endblock %}
+
+
+{% block index_entries %}
+    {% for isolate in chunked_isolates[page-1] %}
+        <tr> 
+            <td class="entry_link"><a href="{{ url_for('isolate.isolate_page', isolate_id=isolate.IsolateID) }}">{{ isolate.IsolateID }}</th>
+            {% if isolate.Complete == 1 %}
+                <td>{{ isolate.IsolateID}}.fasta</td>
+            {% else %}
+                <td></td>
+            {% endif %}
+            {% if isolate.Stage == None %}
+                <td></td>
+            {% else %}
+                <td>{{ isolate.Stage }}</td>
+            {% endif %}
+            <td><img class="mini_picture" src=
+                {% if isolate.isolate_pic_file %}
+                    "{{ isolate.isolate_pic_file }}"
+                {% else %}
+                    "{{ url_for('static', filename='pictures/stock_pic.jpg') }}"
+                {% endif %}
+                alt="N/A"></td>
+        </tr>
+    {% endfor %}
+{% endblock %}

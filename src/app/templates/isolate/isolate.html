@@ -1,0 +1,99 @@
+{% extends 'entry_base.html' %}
+
+{% block header %}
+    <h2 class="entry header">{% block title %}Isolate {{ isolate.IsolateID }}{% endblock %}</h2>
+{% endblock %}
+
+{% block data_head %}
+    <div class="data_head_child">
+        <img class="entry_image" src=
+            {% if isolate.isolate_pic_file %} 
+                "{{ isolate.isolate_pic_file }}"
+            {% else %}
+                "{{   url_for('static', filename='pictures/stock_pic.jpg') }}"
+            {% endif %}
+            >
+    </div>
+    <div class="data_head_child">
+        <table style="width:100%">
+            <tr>
+                <th>Genus</th>
+                <td>{{ isolate.Genus }}</td>
+            </tr>
+            </tr>
+                <th>Species</th>
+                <td><i>{{ isolate.Genus }} {{ isolate.Species }}</i></td>
+            </tr>
+            {% if isolate.Subspecies %} 
+                <tr>
+                    <th>Subspecies</th>
+                    <td>{{ isolate.Subspecies }}</td>
+                </tr>
+            {% endif %}
+            <tr>
+                <th>Strain Name</th>
+                <td>{{ isolate.Strain }}</th>
+            </tr>
+            <tr>
+                <th>Morphotype</th>
+                <td>{{ isolate.Morphotype }}</td>
+            </tr>
+            {% if not isolate.Stage == None %}
+                <tr>
+                    <th>Processing Stage</th>
+                    <td>{{isolate.Stage}} : {{ isolate.isolate_stage.Description.decode('utf-8') }}</td>
+                </tr>
+            {% endif %}
+            {% if isolate.Barcode %}
+                <tr>
+                    <th>Isolate Barcode</th>
+                    <td>{{ isolate.Barcode }}</td>
+                </tr>
+            {% endif %}
+        </table>
+    </div>
+{% endblock %}
+
+{% block data_body %}   
+    {% if 1 in [isolate.Complete, isolate.WGS, isolate.Nanopore, isolate.Unicycler] %}
+        <tr>
+            <th>Isolate Sequencing Information</th>
+        </tr> 
+        {% if isolate.Complete == 1 %}
+            <tr> 
+                <td>Complete Sequence Available: {{ isolate.IsolateID}}.fasta</td>
+            </tr>
+        {% else %}
+            {% if isolate.WGS == 1 %}
+                <tr>
+                    <td>Isolate Whole Genome Sequenced</td>
+                </tr>
+            {% endif %}
+            {% if isolate.Nanopore == 1 %}
+                <tr>
+                    <td>Isolate Nanopore Sequenced</td>
+                </tr>
+            {% endif %}
+            {% if isolate.Unicycler == 1%}
+                <tr>
+                    <td>Isolate Unicycler Sequenced</td>
+                </tr>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+    {% if isolate.clinical_isolate_contact_collection %}
+        <tr>
+            <th>Contacts</th>
+        </tr>
+        {% for contact_link in isolate.clinical_isolate_contact_collection %}
+            <tr>
+                <td>{{ contact_link.contact.Name }} &#60{{ contact_link.contact.Email }}&#62</td>
+            </tr>
+        {% endfor %}
+    {% endif %}
+    {% if isolate.ParentID %}
+        <tr>
+            <th>Mutant of {{isolate.ParentID }}</th>
+        </tr>
+    {% endif %}
+{% endblock %}

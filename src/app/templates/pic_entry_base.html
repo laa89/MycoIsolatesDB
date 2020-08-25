@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block stylelink %}"{{ url_for('static', filename='entry_style.css') }}"{% endblock %}
+
+{% block content %} 
+    <div class="entry_background">
+        <img class="entry_image" src={% block image_file %}{% endblock %}>
+    </div>
+    <table style="width:70%">
+        {% block data %}{% endblock %}
+{% endblock %}
+    

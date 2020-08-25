@@ -1,0 +1,123 @@
+html { 
+    font-family: "Noto Sans", sans-serif; 
+    background: #eee; 
+    padding: 1rem; 
+}
+
+body {
+    max-width: 960px;
+    margin: 0 auto;
+    border-radius: 10px
+}
+
+a { 
+    color: #000000; 
+    text-decoration: none; 
+}
+
+hr { 
+    border: none; 
+    border-top: 1px solid lightgray; 
+}
+
+h2 {
+    font-family: "Noto Sans", sans-serif;
+    color: #377ba8;
+}
+
+.auth {
+    background: lightgray; 
+    align-items: center; 
+    padding: 0.5rem 1.5rem; 
+    border-top-left-radius: 10px; 
+    border-top-right-radius: 10px;
+}
+
+.auth h1 a {
+    font-family: "Noto Sans", sans-serif;
+    color: #9d7868;
+    /*color: #377ba8; */
+    margin: 0;
+    flex: auto;
+    text-decoration: none;
+    padding : 0.5rem 0.25rem;
+}
+
+.directory {
+    background: gray;
+    align-items: center;
+    padding: 0 0.5rem;
+    border-top: 2px ridge black;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.directory h4 {
+    display: block;
+    padding: 0.5rem;
+    margin: 0 1rem ;
+}
+
+.directory h4 a:hover {
+    color: #ffffff
+}
+
+.flash { 
+    margin: 1em 0; 
+    padding: 1em; 
+    background: #cae6f6; 
+    border: 1px solid #377ba8; 
+}
+
+.content { 
+    padding: 0 1rem 1rem; 
+}
+
+.content > header { 
+    border-bottom: 1px solid lightgray; 
+    display: flex; 
+    align-items : flex-end; }
+
+.content > header h1 { 
+    flex: auto; 
+    margin: 1rem 0 0.25rem 0; 
+}
+
+/*
+.content:last-child { 
+    margin-bottom: 0; 
+}
+
+.content form { 
+    margin: 1e m 0; 
+    display: flex; 
+    flex-direction: column; 
+}
+
+.content label { 
+    font-weight: bold; 
+    margin-bottom: 0.5em; 
+}
+
+.content input, .content textarea { 
+    margin-bottom: 1em; 
+}
+
+.content textarea { 
+    min-height: 12em; 
+    resize: vertical; 
+}
+
+.content a:visited, a:link, a:active { 
+    color: #000000; 
+    text-decoration: none; 
+}
+
+input.danger { 
+    color: #cc2f2e; 
+}
+input[type=submit] { 
+    align-self: start; 
+    min-width: 10em; 
+}
+*/

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block stylelink %}"{{ url_for('static', filename='data_style.css') }}"{% endblock %}
+
+{% block content %}
+    <div class="data_control">
+        {% block data_control %}{% endblock %}
+    </div>
+    <div class="data_table">
+        <table style="width:100%">
+            {% block data_table %}{% endblock %}
+        </table>
+    </div>
+{% endblock %}
+
+

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block stylelink %}"{{ url_for('static', filename='index_style.css') }}"{% endblock %}
+
+{% block content %}
+    <table style="width:100%">
+        <tr class="index_head">
+            {% block index_header %}{% endblock %}
+        </tr>
+        <nav class="index_nav">
+            {% block top_page_buttons %}{% endblock %}
+                <!<form class="filters" action="" method="get">
+                    <!<label for="filters"><!Advanced Filter&nbsp</label>
+                    <!<input type="text" id="filters" name="filters">
+        </nav>
+        {% block index_entries %}{% endblock %}
+    </table>
+    <nav class="index_nav">
+        {% block bot_page_buttons %}{% endblock %}
+    </nav>
+{% endblock %}
+
+

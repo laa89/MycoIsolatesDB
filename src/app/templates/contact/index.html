@@ -1,0 +1,54 @@
+{% extends 'index_base.html' %}
+
+{% block header %}
+    <h2>{% block title %}Contact Index{% endblock %}</h2>
+{% endblock %}
+
+{% block index_header %}
+    <th>Contact Person</th>
+    <th>Email</th>
+    <th>Institution</th>
+    <th>Location</th>
+{% endblock %}
+
+{% block top_page_buttons %}{% block bot_page_buttons %}
+    <form class="pages" action={% block filters_input %}
+                       "{{ url_for('contact.contacts_index') }}" {% endblock %}
+                       method="get">
+        {% if page > 1 %}
+            <button type="submit" name="page" value={{ page-1 }}>Prev&nbsp&nbsp</button>
+        {% endif %}
+        {% if page_max > 1 %}
+            {% for i in range(page_max) %}
+                <button type="submit" name="page" value={{ i+1 }}>{{ i+1 }}</button>
+            {% endfor %}
+        {% endif %}
+        {% if page < page_max %}
+            <button type="submit" name="page" value={{ page+1 }}>&nbsp&nbspNext</button>
+        {% endif %}
+{% endblock %} 
+{% endblock %}
+
+
+{% block index_entries %}
+    {% for contact in chunked_contacts[page-1] %}
+        <tr>
+            <td>{{ contact.Name }}</td>
+            {% if contact.Email == None %}
+                <td></td>
+            {% else %}  
+                <td>{{ contact.Email }}</td>
+            {% endif %}
+            {% if contact.Institution == None %}
+                <td></td>
+            {% else %}
+                <td>{{ contact.Institution }}</td>
+            {% endif %}
+            {% if contact.Location == None %}
+                <td></td>
+            {% else%}
+                <td>{{ contact.Location }}</td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+{% endblock %}
