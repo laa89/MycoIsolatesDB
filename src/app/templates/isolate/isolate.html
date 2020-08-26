@@ -87,7 +87,7 @@
         </tr>
         {% for contact_link in isolate.clinical_isolate_contact_collection %}
             <tr>
-                <td>{{ contact_link.contact.Name }} &#60{{ contact_link.contact.Email }}&#62</td>
+                <td><a href="{{ url_for('contact.contact_page', contact_id=contact_link.ContactID) }}">{{ contact_link.contact.Name }} &#60{{ contact_link.contact.Email }}&#62</td>
             </tr>
         {% endfor %}
     {% endif %}

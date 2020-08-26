@@ -48,10 +48,11 @@ def isolate_page(isolate_id):
     alchemist = alchemy.alchemist
     
     isolate_map = alchemist.mapper.classes["clinical_isolate"]
-    isolate = alchemist.session.query(isolate_map).filter_by(IsolateID=isolate_id).scalar()
+    isolate = alchemist.session.query(isolate_map)\
+                               .filter_by(IsolateID=isolate_id).scalar()
     
     if isolate is None:
-        return render_template("isolate/isolate404.html", isolate_id=isolate_id)
+        return render_template("entry404.html", entry_id=isolate.IsolateID)
     else:
         return render_template("isolate/isolate.html", isolate=isolate)
 

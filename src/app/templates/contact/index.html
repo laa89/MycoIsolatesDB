@@ -33,7 +33,7 @@
 {% block index_entries %}
     {% for contact in chunked_contacts[page-1] %}
         <tr>
-            <td>{{ contact.Name }}</td>
+            <td class="entry_link"><a href="{{ url_for('contact.contact_page', contact_id=contact.ContactID) }}">{{ contact.Name }}</td>
             {% if contact.Email == None %}
                 <td></td>
             {% else %}  
