@@ -1,9 +1,5 @@
 @import "base_style.css";
 
-a:hover {
-    color: #9d7868;
-}
-
 .data_table {
     overflow: scroll;
     margin-top: 2%;
@@ -31,6 +27,14 @@ a:hover {
     position: sticky;
     background-color: #b5b5b5;
     padding: 5px;
+}
+
+.data_table th a:hover {
+    color: #489fd9;
+}
+
+.data_table td a:hover {
+    color: #9d7868;
 }
 
 .data_table tr:first-child th:first-child {

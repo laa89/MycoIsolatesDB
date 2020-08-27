@@ -1,35 +1,35 @@
 {% extends 'entry_base.html' %}
 
 {% block header %}
-<h2 class="entry header">{% block title %}{{ contact.Name }}{% endblock %}</h2>
+<h2 class="entry_header">{% block title %}{{ contact.Name }}{% endblock %}</h2>
 {% endblock %}
 
 {% block data_head %}
-    <div class="data_head_child">
-        <table style="width:100%">
-            <tr>
-                <th>Institution</th>
-                <td>{{ contact.Institution }}</td>
-            </tr>
-            <tr>
-                <th>Location</th>
-                <td>{{ contact.Location }}</td>
-            </td>
-            <tr>
-                <th>Email</th>
-                <td>{{ contact.Email }}</td>
-            </tr>
-        </table>
+    <div>
+        <h3 class="entry_subheader">{{ contact.Institution }}</h3>
+        <h4 class="entry_subheader">{{ contact.Location }}</h4>
+        <h4 class="entry_subheader">{{ contact.Email }}</h4>
     </div>
+
 {% endblock %}
 
 {% block data_body %}
     <tr>
-        <th>Attributed Clinical Isolates</th>
+        <th rowspan=2>Attributed Clinical Isolates</th>
     </tr>
-    {% for contact_link in contact.clinical_isolate_contact_collection %}
         <tr>
-            <td><a href="{{ url_for('isolate.isolate_page', isolate_id=contact_link.IsolateID) }}">{{ contact_link.IsolateID }}</td>
+            <table class="data_body" style=width:100%>
+                <tr>
+                    <th>Isolate</th>
+                    <th>Processing Stage</th>
+                </tr>
+
+                {% for contact_link in contact.clinical_isolate_contact_collection %}
+                    <tr>
+                        <td><a href="{{ url_for('isolate.isolate_page', isolate_id=contact_link.IsolateID) }}">{{ contact_link.IsolateID }}</td>
+                        <td>{{ contact_link.clinical_isolate.Stage }}: {{ contact_link.clinical_isolate.isolate_stage.Description.decode('utf-8') }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
         </tr>
-    {% endfor %}
 {% endblock %}

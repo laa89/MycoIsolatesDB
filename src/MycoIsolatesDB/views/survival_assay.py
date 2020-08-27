@@ -7,8 +7,8 @@ from MycoIsolatesDB import alchemy
 
 bp = Blueprint("survival_assay", __name__)
 
-@bp.route("/survival_assays", methods=("GET",))
-def survival_assays_index(filters=""):
+@bp.route("/survival_assay_data", methods=("GET",))
+def survival_assay_data(filters=""):
     filters = request.args.get("filters")
     if not filters:
         filters = ""

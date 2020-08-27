@@ -91,9 +91,47 @@
             </tr>
         {% endfor %}
     {% endif %}
+    {% if isolate.phage_cocktail_collection %}
+        <tr>
+            <th>Phage Cocktails</th>
+        </tr>
+        <tr>
+            <table class="data_body" style="width:100%">
+                <tr>
+                    <th>Ingredients</th>
+                    <th>Endo Screen</th>
+                    <th>Accugen Screen</th>
+                    <th>Sent</th>
+                </tr>
+                {% for cocktail in isolate.phage_cocktail_collection %}
+                    <tr>
+                        <td>{{ cocktail_recipes[cocktail.CocktailID] }}</td>
+                        <td>
+                            {% if cocktail.Endotoxin == 1 %}
+                                Yes
+                            {% else %}
+                                No
+                            {% endif %}</td>
+                        <td>
+                            {% if cocktail.Endotoxin == 1 %}
+                                Yes
+                            {% else %}
+                                No
+                            {% endif %}</td>
+                        <td>
+                            {% if cocktail.Sent == 1 %}
+                                Yes
+                            {% else %}
+                                No
+                            {% endif %}</td
+                    </tr>
+                {% endfor %}
+            </table>
+        </tr>
+    {% endif %}
     {% if isolate.ParentID %}
         <tr>
-            <th>Mutant of {{isolate.ParentID }}</th>
+            <th>Mutant of {{ isolate.ParentID }}</th>
         </tr>
     {% endif %}
 {% endblock %}

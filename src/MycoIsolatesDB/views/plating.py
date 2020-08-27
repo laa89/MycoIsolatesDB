@@ -7,44 +7,45 @@ from MycoIsolatesDB import alchemy
 
 bp = Blueprint("plating", __name__)
 
-@bp.route("/EOP_assays")
-def platings_index(filters=""):
+@bp.route("/plating_assay_data", methods=("GET",))
+def plating_assay_data():
     db_filter = alchemy.build_filter()
     db_filter.key = "plating.PlatingID"
 
-    if filters != "":
+    filters = request.args.get("filters")
+    if filters != None:
         db_filter.add(filters)
     db_filter.values = db_filter.build_values(
                                 where=db_filter.build_where_clauses())
 
     phages = db_filter.transpose("plating.PhageID")
-    EOP_data_dicts = build_plating_data_dicts(db_filter, phages)
+    plating_data_dicts = build_plating_data_dicts(db_filter, phages)
 
-    return render_template("plating/data.html", phages=phages, EOP_data_dicts=EOP_data_dicts)
+    return render_template("plating/data.html", phages=phages, plating_data_dicts=plating_data_dicts)
 
 def build_plating_data_dicts(db_filter, phages):
     isolates = db_filter.transpose("plating.IsolateID")
 
-    EOP_data_dicts = []
+    plating_data_dicts = []
     values = db_filter.values
     for isolate in isolates:   
         db_filter.values = [isolate]
         db_filter.key = "plating.IsolateID"
 
-        EOP_data_dict = OrderedDict()
-        EOP_data_dict["Isolate"] = isolate
+        plating_data_dict = OrderedDict()
+        plating_data_dict["Isolate"] = isolate
        
         plating_data = db_filter.select(["plating.EOP", "plating.PhageID"])
         for data_dict in plating_data:
-            EOP_data_dict[data_dict["PhageID"]] = data_dict["EOP"]
+            plating_data_dict[data_dict["PhageID"]] = data_dict["EOP"]
 
         for phage in phages:
-            plating_EOP = EOP_data_dict.get(phage, "")
-            EOP_data_dict[phage] = plating_EOP
+            plating_EOP = plating_data_dict.get(phage, "")
+            plating_data_dict[phage] = plating_EOP
 
-        EOP_data_dicts.append(EOP_data_dict)
+        plating_data_dicts.append(plating_data_dict)
 
-    return EOP_data_dicts
+    return plating_data_dicts
 
 #@bp.route("/EOP_Assays/<plating_id>")
 def plating_assay_page(plating_id):

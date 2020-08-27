@@ -7,8 +7,8 @@ from MycoIsolatesDB import alchemy
 
 bp = Blueprint("induction", __name__)
 
-@bp.route("/induction")
-def induction_index(filters=""):
+@bp.route("/induction_assay_data")
+def induction_assay_data(filters=""):
     db_filter = alchemy.build_filter()
     db_filter.key = "induction.InductionID"
 
