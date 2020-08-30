@@ -7,11 +7,21 @@ body {
     border-radius: 10px;
 }
 
-h2 {
+h2.entry_header {
     font-family: "Noto Sans", sans-serif;
     font-weight: normal;
     color: #489fd9;
     margin: 1rem;
+}
+
+.entry_subheader {
+    font-family: "Noto Sans", sans-serif;
+    color: #377ba8;
+    margin: 1rem;
+}
+
+.entry_subheader {
+    text-align: left;
 }
 
 .entry_image {
@@ -58,5 +68,9 @@ div.data_body{
 table.data_body th{
     background-color: #eeeeee;
     border-radius: 5px;
+}
+
+.data_body a:hover {
+    color: #9d7868;
 }
 

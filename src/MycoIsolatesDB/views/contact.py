@@ -44,3 +44,17 @@ def contacts_index(def_size=20):
                            chunked_contacts=chunked_contacts, 
                            page=page, page_max=page_max)
 
+@bp.route("/contacts/<contact_id>")
+def contact_page(contact_id):
+    alchemist = alchemy.alchemist
+
+    contact_map = alchemist.mapper.classes["contact"]
+    contact = alchemist.session.query(contact_map)\
+                               .filter_by(ContactID=contact_id).scalar()
+
+    if contact is None:
+        return render_template("entry404.html", entry_id=contact.Name)
+    else:
+        return render_template("contact/contact.html", contact=contact)
+
+    

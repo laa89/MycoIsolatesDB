@@ -87,13 +87,51 @@
         </tr>
         {% for contact_link in isolate.clinical_isolate_contact_collection %}
             <tr>
-                <td>{{ contact_link.contact.Name }} &#60{{ contact_link.contact.Email }}&#62</td>
+                <td><a href="{{ url_for('contact.contact_page', contact_id=contact_link.ContactID) }}">{{ contact_link.contact.Name }} &#60{{ contact_link.contact.Email }}&#62</td>
             </tr>
         {% endfor %}
     {% endif %}
+    {% if isolate.phage_cocktail_collection %}
+        <tr>
+            <th>Phage Cocktails</th>
+        </tr>
+        <tr>
+            <table class="data_body" style="width:100%">
+                <tr>
+                    <th>Ingredients</th>
+                    <th>Endo Screen</th>
+                    <th>Accugen Screen</th>
+                    <th>Sent</th>
+                </tr>
+                {% for cocktail in isolate.phage_cocktail_collection %}
+                    <tr>
+                        <td>{{ cocktail_recipes[cocktail.CocktailID] }}</td>
+                        <td>
+                            {% if cocktail.Endotoxin == 1 %}
+                                Yes
+                            {% else %}
+                                No
+                            {% endif %}</td>
+                        <td>
+                            {% if cocktail.Endotoxin == 1 %}
+                                Yes
+                            {% else %}
+                                No
+                            {% endif %}</td>
+                        <td>
+                            {% if cocktail.Sent == 1 %}
+                                Yes
+                            {% else %}
+                                No
+                            {% endif %}</td
+                    </tr>
+                {% endfor %}
+            </table>
+        </tr>
+    {% endif %}
     {% if isolate.ParentID %}
         <tr>
-            <th>Mutant of {{isolate.ParentID }}</th>
+            <th>Mutant of {{ isolate.ParentID }}</th>
         </tr>
     {% endif %}
 {% endblock %}
